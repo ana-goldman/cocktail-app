@@ -1,14 +1,13 @@
+import React from 'react';
 import { useQuery } from 'react-query';
-import { getDrinks } from '../utils/api/getDrinks';
+import { getRandomDrink } from '../utils/api/getRandomDrink';
 import { Drinks } from '../types';
 import DrinkCard from './DrinkCard';
-
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
 const DrinkList: React.FC = () => {
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
     'item',
-    () => getDrinks(url),
+    getRandomDrink,
   );
 
   if (isLoading) {

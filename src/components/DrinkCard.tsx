@@ -1,10 +1,11 @@
+import React from 'react';
 import { Drink } from '../types';
 
-const DrinkCard: React.FC<{ key: string; drink: Drink }> = (props: {
+type Props = {
   drink: Drink;
-}) => {
-  const { drink } = props;
+};
 
+const DrinkCard: React.FC<Props> = ({ drink }) => {
   return (
     <li>
       <img src={drink.strDrinkThumb} alt="drink" />
