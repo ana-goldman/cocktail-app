@@ -21,7 +21,7 @@ const DrinkList: React.FC = () => {
   return (
     <>
       <span>Here is your list</span>
-      <ul className="card-list">
+      <ul>
         {data?.drinks.map((drink) => (
           <DrinkCard key={drink.idDrink} drink={drink} />
         ))}
