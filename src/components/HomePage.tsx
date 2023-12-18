@@ -1,12 +1,12 @@
 import React from 'react';
 import DrinkList from './DrinkList';
-import SearchBar from './SearchBar';
+import SearchByName from './SearchByName';
 
 const HomePage: React.FC = () => {
   return (
     <>
       <DrinkList />
-      <SearchBar />
+      <SearchByName />
     </>
   );
 };
