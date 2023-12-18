@@ -11,7 +11,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/details" element={<DrinkDetails />} />
+        <Route path="/:id" element={<DrinkDetails />} />
       </Routes>
     </QueryClientProvider>
   );
