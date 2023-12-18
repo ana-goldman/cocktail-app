@@ -4,7 +4,7 @@ import { getRandomDrink } from '../utils/api/getRandomDrink';
 import { Drinks } from '../types';
 import DrinkCard from './DrinkCard';
 
-const DrinkList: React.FC = () => {
+const RandomDrink: React.FC = () => {
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
     'item',
     getRandomDrink,
@@ -21,14 +21,10 @@ const DrinkList: React.FC = () => {
   return (
     <>
       <span>Here is your list</span>
-      <ul className="card-list">
-        {data?.drinks.map((drink) => (
-          <DrinkCard key={drink.idDrink} drink={drink} />
-        ))}
-      </ul>
+      {data && <DrinkCard drink={data.drinks[0]} />}
       <button onClick={() => refetch()}>Click me</button>
     </>
   );
 };
 
-export default DrinkList;
+export default RandomDrink;

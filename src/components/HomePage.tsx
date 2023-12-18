@@ -1,8 +1,14 @@
 import React from 'react';
-import DrinkList from './DrinkList';
+import RandomDrink from './RandomDrink';
+import DrinkListByName from './DrinkListByName';
 
 const HomePage: React.FC = () => {
-  return <DrinkList />;
+  return (
+    <>
+      <RandomDrink />
+      <DrinkListByName />
+    </>
+  );
 };
 
 export default HomePage;
