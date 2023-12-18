@@ -1,10 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getDrinkById } from '../utils/api/getDrinkById';
 import { Drinks } from '../types';
 
 const DrinkDetails: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const { isLoading, isError, data, error } = useQuery<Drinks, Error>(
@@ -33,6 +34,7 @@ const DrinkDetails: React.FC = () => {
           </ul>
         </div>
       )}
+      <button onClick={() => navigate('/')}>Back</button>
     </>
   );
 };
