@@ -1,12 +1,12 @@
 import React from 'react';
-import DrinkList from './DrinkList';
-import SearchByName from './SearchByName';
+import RandomDrink from './RandomDrink';
+import DrinkListByName from './DrinkListByName';
 
 const HomePage: React.FC = () => {
   return (
     <>
-      <DrinkList />
-      <SearchByName />
+      <RandomDrink />
+      <DrinkListByName />
     </>
   );
 };

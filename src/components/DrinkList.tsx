@@ -1,33 +1,18 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { getRandomDrink } from '../utils/api/getRandomDrink';
-import { Drinks } from '../types';
 import DrinkCard from './DrinkCard';
+import { Drinks } from '../types';
 
-const DrinkList: React.FC = () => {
-  const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
-    'item',
-    getRandomDrink,
-  );
+type Props = {
+  data: Drinks;
+};
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error.message}</div>;
-  }
-
+const DrinkList: React.FC<Props> = ({ data }) => {
   return (
-    <>
-      <span>Here is your list</span>
-      <ul>
-        {data?.drinks.map((drink) => (
-          <DrinkCard key={drink.idDrink} drink={drink} />
-        ))}
-      </ul>
-      <button onClick={() => refetch()}>Click me</button>
-    </>
+    <ul>
+      {data?.drinks.map((drink) => (
+        <DrinkCard key={drink.idDrink} drink={drink} />
+      ))}
+    </ul>
   );
 };
 

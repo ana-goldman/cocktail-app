@@ -2,19 +2,19 @@ import React from 'react';
 
 type Props = {
   value: string;
-  handleSearch: (e: React.SyntheticEvent) => void;
-  handleChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const SearchBar: React.FC<Props> = ({ value, handleSearch, handleChange }) => {
+const SearchBar: React.FC<Props> = ({ value, onSubmit, onChange }) => {
   return (
-    <form onSubmit={handleSearch}>
+    <form onSubmit={onSubmit}>
       <label>Search</label>
       <input
         type="text"
         placeholder="type here..."
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
       />
       <button type="submit">Search</button>
     </form>

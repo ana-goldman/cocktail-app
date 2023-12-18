@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getDrinkByName } from '../utils/api/getDrinkByName';
-import DrinkCard from './DrinkCard';
 import { Drinks } from '../types';
 import SearchBar from './SearchBar';
+import DrinkList from './DrinkList';
 
-const SearchByName: React.FC = () => {
+const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
     'search',
@@ -14,10 +14,6 @@ const SearchByName: React.FC = () => {
       enabled: false,
     },
   );
-
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setSearchInput(e.currentTarget.value);
-  };
 
   const handleSearch = (e: React.SyntheticEvent): void => {
     e.preventDefault();
@@ -30,22 +26,19 @@ const SearchByName: React.FC = () => {
     <>
       <SearchBar
         value={searchInput}
-        handleSearch={handleSearch}
-        handleChange={handleChange}
+        onSubmit={handleSearch}
+        onChange={(e) => setSearchInput(e.currentTarget.value)}
       />
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}
-      {data?.drinks !== null ? (
-        <ul>
-          {data?.drinks.map((drink) => (
-            <DrinkCard key={drink.idDrink} drink={drink} />
-          ))}
-        </ul>
-      ) : (
-        <div>Nothing found...</div>
-      )}
+      {data &&
+        (data?.drinks !== null ? (
+          <DrinkList data={data} />
+        ) : (
+          <div>Nothing found...</div>
+        ))}
     </>
   );
 };
 
-export default SearchByName;
+export default DrinkListByName;
