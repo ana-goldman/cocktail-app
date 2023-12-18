@@ -32,7 +32,7 @@ const DrinkListByName: React.FC = () => {
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}
       {data &&
-        (data?.drinks !== null ? (
+        (data?.drinks?.length > 0 ? (
           <ul>
             {data?.drinks.map((drink) => (
               <DrinkCard key={drink.idDrink} drink={drink} />
