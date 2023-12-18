@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { getDrinkByName } from '../utils/api/getDrinkByName';
 import { Drinks } from '../types';
 import SearchBar from './SearchBar';
-import DrinkList from './DrinkList';
+import DrinkCard from './DrinkCard';
 
 const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -33,7 +33,11 @@ const DrinkListByName: React.FC = () => {
       {isError && <div>Error: {error.message}</div>}
       {data &&
         (data?.drinks !== null ? (
-          <DrinkList data={data} />
+          <ul>
+            {data?.drinks.map((drink) => (
+              <DrinkCard key={drink.idDrink} drink={drink} />
+            ))}
+          </ul>
         ) : (
           <div>Nothing found...</div>
         ))}

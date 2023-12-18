@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { getRandomDrink } from '../utils/api/getRandomDrink';
 import { Drinks } from '../types';
-import DrinkList from './DrinkList';
+import DrinkCard from './DrinkCard';
 
 const RandomDrink: React.FC = () => {
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
@@ -21,7 +21,7 @@ const RandomDrink: React.FC = () => {
   return (
     <>
       <span>Here is your list</span>
-      {data && <DrinkList data={data} />}
+      {data && <DrinkCard drink={data.drinks[0]} />}
       <button onClick={() => refetch()}>Click me</button>
     </>
   );
