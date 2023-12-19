@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { Drinks } from '../../types';
+import { Drink } from '../../types';
 
-export const getDrinkById = async (id: string): Promise<Drinks> => {
+export const getDrinkById = async (id: string): Promise<Drink> => {
   const response = await axios.get(
     `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
   );
-  return response.data;
+  return response.data.drinks[0];
 };
