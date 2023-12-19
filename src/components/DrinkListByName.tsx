@@ -34,7 +34,7 @@ const DrinkListByName: React.FC = () => {
       {data &&
         (data?.drinks?.length > 0 ? (
           <ul>
-            {data?.drinks.map((drink) => (
+            {data.drinks.map((drink) => (
               <DrinkCard key={drink.idDrink} drink={drink} />
             ))}
           </ul>
