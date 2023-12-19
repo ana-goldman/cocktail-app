@@ -20,7 +20,6 @@ const RandomDrink: React.FC = () => {
 
   return (
     <>
-      <span>Here is your list</span>
       {data && <DrinkCard drink={data.drinks[0]} />}
       <button onClick={() => refetch()}>Click me</button>
     </>

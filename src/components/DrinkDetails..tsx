@@ -40,7 +40,7 @@ const DrinkDetails: React.FC = () => {
           </ul>
         </div>
       )}
-      <button onClick={() => navigate('/')}>Back</button>
+      <button onClick={() => navigate(-1)}>Back</button>
     </>
   );
 };

@@ -8,10 +8,11 @@ import DrinkCard from './DrinkCard';
 const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
-    'search',
+    ['searchByName', { searchInput }],
     () => getDrinkByName(searchInput),
     {
-      enabled: false,
+      enabled: searchInput.trim().length >= 3,
+      keepPreviousData: false,
     },
   );
 
