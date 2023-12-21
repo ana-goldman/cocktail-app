@@ -1,34 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getDrinkByName } from '../utils/api/getDrinkByName';
 import { Drinks } from '../types';
 import SearchBar from './SearchBar';
 import DrinkCard from './DrinkCard';
+import { useDebounce } from '../utils/hooks/useDebounce';
 
 const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
+  const debouncedValue = useDebounce<string>(searchInput, 500);
   const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
-    ['searchByName', { searchInput }],
-    () => getDrinkByName(searchInput),
+    ['searchByName', { debouncedValue }],
+    () => getDrinkByName(debouncedValue),
     {
-      enabled: searchInput.trim().length >= 3,
+      enabled: false,
       keepPreviousData: false,
     },
   );
 
-  const handleSearch = (e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    if (searchInput !== '') {
-      refetch();
-    }
-  };
+  useEffect(() => {
+    debouncedValue.trim().length >= 3 && refetch();
+  }, [debouncedValue]);
 
   return (
     <>
       <SearchBar
         value={searchInput}
-        onSubmit={handleSearch}
         onChange={(e) => setSearchInput(e.currentTarget.value)}
+        withBtn={false}
       />
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}

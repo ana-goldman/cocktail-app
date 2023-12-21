@@ -10,10 +10,11 @@ const DrinkListByIngredient: React.FC = () => {
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState('');
   const { isLoading, isError, data, error, refetch } = useQuery<Drink[], Error>(
-    'searchByIngredient',
+    ['searchByIngredient', { searchInput }],
     () => getDrinkByIngredient(searchInput),
     {
       enabled: false,
+      keepPreviousData: false,
     },
   );
 
@@ -30,6 +31,7 @@ const DrinkListByIngredient: React.FC = () => {
         value={searchInput}
         onSubmit={handleSearch}
         onChange={(e) => setSearchInput(e.currentTarget.value)}
+        withBtn={true}
       />
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}
@@ -42,7 +44,7 @@ const DrinkListByIngredient: React.FC = () => {
       ) : (
         <div>Nothing found...</div>
       )}
-      <button onClick={() => navigate(-1)}>Back</button>
+      <button onClick={() => navigate('/')}>Back</button>
     </>
   );
 };
