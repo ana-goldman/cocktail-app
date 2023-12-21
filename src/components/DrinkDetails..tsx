@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { getDrinkById } from '../utils/api/getDrinkById';
 import { Drink } from '../types';
 
 const DrinkDetails: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams<{ id: string }>();
 
   const { isLoading, isError, data, error } = useQuery<Drink, Error>(
@@ -40,7 +41,14 @@ const DrinkDetails: React.FC = () => {
           </ul>
         </div>
       )}
-      <button onClick={() => navigate('/')}>Back</button>
+      <button
+        onClick={() => {
+          const back = location.state?.from?.pathname;
+          back ? navigate(back) : navigate('/');
+        }}
+      >
+        Back
+      </button>
     </>
   );
 };
