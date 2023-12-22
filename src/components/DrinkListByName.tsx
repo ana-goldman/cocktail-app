@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getDrinkByName } from '../utils/api/getDrinkByName';
 import { Drinks } from '../types';
@@ -9,18 +9,14 @@ import { useDebounce } from '../utils/hooks/useDebounce';
 const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const debouncedValue = useDebounce<string>(searchInput, 500);
-  const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
+  const { isLoading, isError, data, error } = useQuery<Drinks, Error>(
     ['searchByName', { debouncedValue }],
     () => getDrinkByName(debouncedValue),
     {
-      enabled: false,
+      enabled: debouncedValue.trim().length >= 3,
       keepPreviousData: false,
     },
   );
-
-  useEffect(() => {
-    debouncedValue.trim().length >= 3 && refetch();
-  }, [debouncedValue]);
 
   return (
     <>
