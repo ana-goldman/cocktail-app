@@ -19,7 +19,7 @@ const DrinkListByName: React.FC = () => {
   );
 
   return (
-    <>
+    <div className="col-span-2">
       <SearchBar
         value={searchInput}
         onChange={(e) => setSearchInput(e.currentTarget.value)}
@@ -29,15 +29,15 @@ const DrinkListByName: React.FC = () => {
       {isError && <div>Error: {error.message}</div>}
       {data &&
         (data?.drinks?.length > 0 ? (
-          <ul>
+          <ul className="list-none grid grid-cols-4 gap-5">
             {data.drinks.map((drink) => (
               <DrinkCard key={drink.idDrink} drink={drink} />
             ))}
           </ul>
         ) : (
-          <div>Nothing found...</div>
+          <div className="text-4xl text-center">Nothing found...</div>
         ))}
-    </>
+    </div>
   );
 };
 
