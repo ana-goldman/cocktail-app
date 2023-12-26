@@ -2,11 +2,12 @@ import React from 'react';
 
 type Props = {
   value: string;
-  onSubmit: (e: React.SyntheticEvent) => void;
+  onSubmit?: (e: React.SyntheticEvent) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  withBtn: boolean;
 };
 
-const SearchBar: React.FC<Props> = ({ value, onSubmit, onChange }) => {
+const SearchBar: React.FC<Props> = ({ value, onSubmit, onChange, withBtn }) => {
   return (
     <form onSubmit={onSubmit}>
       <label>Search</label>
@@ -16,7 +17,7 @@ const SearchBar: React.FC<Props> = ({ value, onSubmit, onChange }) => {
         value={value}
         onChange={onChange}
       />
-      <button type="submit">Search</button>
+      {withBtn && <button type="submit">Search</button>}
     </form>
   );
 };

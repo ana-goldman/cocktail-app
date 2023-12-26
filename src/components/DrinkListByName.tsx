@@ -4,30 +4,26 @@ import { getDrinkByName } from '../utils/api/getDrinkByName';
 import { Drinks } from '../types';
 import SearchBar from './SearchBar';
 import DrinkCard from './DrinkCard';
+import { useDebounce } from '../utils/hooks/useDebounce';
 
 const DrinkListByName: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
-  const { isLoading, isError, data, error, refetch } = useQuery<Drinks, Error>(
-    'search',
-    () => getDrinkByName(searchInput),
+  const debouncedValue = useDebounce<string>(searchInput, 500);
+  const { isLoading, isError, data, error } = useQuery<Drinks, Error>(
+    ['searchByName', { debouncedValue }],
+    () => getDrinkByName(debouncedValue),
     {
-      enabled: false,
+      enabled: debouncedValue.trim().length >= 3,
+      keepPreviousData: false,
     },
   );
-
-  const handleSearch = (e: React.SyntheticEvent): void => {
-    e.preventDefault();
-    if (searchInput !== '') {
-      refetch();
-    }
-  };
 
   return (
     <>
       <SearchBar
         value={searchInput}
-        onSubmit={handleSearch}
         onChange={(e) => setSearchInput(e.currentTarget.value)}
+        withBtn={false}
       />
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}

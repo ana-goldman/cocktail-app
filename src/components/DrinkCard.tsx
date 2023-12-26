@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Drink } from '../types';
 
 type Props = {
@@ -8,9 +8,14 @@ type Props = {
 
 const DrinkCard: React.FC<Props> = ({ drink }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
-    <li onClick={() => navigate(`/${drink.idDrink}`)}>
+    <li
+      onClick={() =>
+        navigate(`/${drink.idDrink}`, { state: { from: location } })
+      }
+    >
       <img src={drink.strDrinkThumb} alt="drink" />
       <p>{drink.strDrink}</p>
     </li>
