@@ -10,11 +10,13 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:id" element={<DrinkDetails />} />
-        <Route path="/drinks" element={<DrinkListByIngredient />} />
-      </Routes>
+      <div className="md:container md:mx-auto">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/:id" element={<DrinkDetails />} />
+          <Route path="/drinks" element={<DrinkListByIngredient />} />
+        </Routes>
+      </div>
     </QueryClientProvider>
   );
 }

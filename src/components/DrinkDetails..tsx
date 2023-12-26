@@ -30,18 +30,28 @@ const DrinkDetails: React.FC = () => {
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}
       {data && (
-        <div>
-          <p>{data.strDrink}</p>
-          <img src={data.strDrinkThumb} alt="drink" />
-          <p>Ingredients</p>
-          <ul>
+        <div className="mb-4">
+          <div className="text-center mb-6">
+            <p className="text-4xl pb-4">{data.strDrink}</p>
+            <img
+              className="size-fit max-h-80 inline-block rounded-full"
+              src={data.strDrinkThumb}
+              alt="drink"
+            />
+          </div>
+
+          <p className="text-4xl pb-4">Ingredients</p>
+          <ul className="list-disc">
             {ingredients.map(([key, value]) => (
-              <li key={key}>{value}</li>
+              <li className="text-sm" key={key}>
+                {value}
+              </li>
             ))}
           </ul>
         </div>
       )}
       <button
+        className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full"
         onClick={() => {
           const back = location.state?.from?.pathname;
           back ? navigate(back) : navigate('/');

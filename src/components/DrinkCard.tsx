@@ -12,12 +12,17 @@ const DrinkCard: React.FC<Props> = ({ drink }) => {
 
   return (
     <li
+      className="max-w-sm rounded overflow-hidden shadow-lg text-center"
       onClick={() =>
         navigate(`/${drink.idDrink}`, { state: { from: location } })
       }
     >
-      <img src={drink.strDrinkThumb} alt="drink" />
-      <p>{drink.strDrink}</p>
+      <img
+        className="size-fit max-h-80 inline-block"
+        src={drink.strDrinkThumb}
+        alt="drink"
+      />
+      <p className="px-6 py-4">{drink.strDrink}</p>
     </li>
   );
 };

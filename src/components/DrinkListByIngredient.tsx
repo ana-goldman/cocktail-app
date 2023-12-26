@@ -36,15 +36,20 @@ const DrinkListByIngredient: React.FC = () => {
       {isLoading && <div>Loading...</div>}
       {isError && <div>Error: {error.message}</div>}
       {data ? (
-        <ul>
+        <ul className="list-none grid grid-cols-4 gap-5 mb-4">
           {data.map((drink) => (
             <DrinkCard key={drink.idDrink} drink={drink} />
           ))}
         </ul>
       ) : (
-        <div>Nothing found...</div>
+        <div className="text-4xl text-center">Nothing found...</div>
       )}
-      <button onClick={() => navigate('/')}>Back</button>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full"
+        onClick={() => navigate('/')}
+      >
+        Back
+      </button>
     </>
   );
 };

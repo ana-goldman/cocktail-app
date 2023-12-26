@@ -19,10 +19,15 @@ const RandomDrink: React.FC = () => {
   }
 
   return (
-    <>
+    <ul className="list-none text-center justify-self-center space-y-4">
       {data && <DrinkCard drink={data.drinks[0]} />}
-      <button onClick={() => refetch()}>Click me</button>
-    </>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full"
+        onClick={() => refetch()}
+      >
+        Refresh
+      </button>
+    </ul>
   );
 };
 
